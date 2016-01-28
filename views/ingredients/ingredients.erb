@@ -1,0 +1,33 @@
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Amount</th>
+        <th>Ingredient</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @recipe.ingredients.each do |ingredient|%>
+        <tr>
+          <td><%= ingredient.amount %></td>
+          <td><%= ingredient.ingredient %></td>
+          <td>
+            <div class="col-xs-1">
+              <form class="form-horizontal" role="form" action="/recipes/<%= @recipe.id %>/ingredients/<%= ingredient.id %>/edit" method="get">
+                <button type="submit" class="btn btn-link">Edit</button>
+              </form>
+            </div>
+            <div class="col-xs-1">
+              <form class="form-horizontal" role="form" action="/recipes/<%= @recipe.id %>/ingredients/<%= ingredient.id %>" method="post">
+                <input name="_method" type="hidden" value="delete">
+                <button type="submit" class="btn btn-link">Delete</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

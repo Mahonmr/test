@@ -1,1 +1,31 @@
-<%= yield %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+      <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Home</a>
+          <a class="navbar-brand" href="/recipes">View Recipes</a>
+          <% if are_you?(request.path_info, 'recipes') %>
+            <a class="navbar-brand" href="/recipes/new">Add a Recipe</a>
+          <% elsif are_you?(request.path_info, 'instructions') %>
+            <a class="navbar-brand" href="<%= request.path_info %>/new">Add an Instruction</a>
+          <% elsif are_you?(request.path_info, 'ingredients') %>
+            <a class="navbar-brand" href="<%= request.path_info %>/new">Add an Ingredient</a>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+  </head>
+  <body>
+    <div class="container container-table">
+      <div class="row vertical-center-row">
+          <div class="text-center col-md-4 col-md-offset-4"><h1>Eat Like a Boss</h1></div>
+      </div>
+    </div>
+    <%= yield %>
+  </body>
+</html>

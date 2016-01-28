@@ -1,0 +1,18 @@
+<div class="container container-table">
+    <div class="row vertical-center-row">
+        <div class="text-center col-md-4 col-md-offset-4"><h2><%= "Add an Instrucion for the #{@recipe.name} recipe" %></h2></div>
+    </div>
+</div>
+
+<div class= 'container'>
+  <form action="/recipes/<%= @recipe.id %>/instructions" method="post">
+    <div class="form-group">
+      <label>Step:</label>
+      <input type="text" class="form-control" id="step" name="step" placeholder="enter number"><br>
+
+      <label>Task:</label>
+      <input type="text" class="form-control" id="task" name="task" placeholder="example add eggs">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>

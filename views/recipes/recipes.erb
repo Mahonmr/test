@@ -1,0 +1,47 @@
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Ranking</th>
+        <th>Recipe</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @recipes.each do |recipe|%>
+        <tr>
+          <td><%= recipe.ranking %></td>
+          <td><%= recipe.name %></td>
+          <td>
+            <div class="col-xs-1">
+              <form class="form-horizontal" role="form" action="/recipes/<%= recipe.id %>" method="get">
+                <button type="submit" class="btn btn-link">View</button>
+              </form>
+            </div>
+            <div class="col-xs-1">
+              <form class="form-horizontal" role="form" action="/recipes/<%= recipe.id %>/edit" method="get">
+                <button type="submit" class="btn btn-link">Edit</button>
+              </form>
+            </div>
+            <div class="col-xs-1">
+              <form class="form-horizontal" role="form" action="/recipes/<%= recipe.id %>" method="post">
+                <input name="_method" type="hidden" value="delete">
+                <button type="submit" class="btn btn-link">Delete</button>
+              </form>
+            </div>
+            <div class="col-xs-2">
+              <form class="form-horizontal" role="form" action="/recipes/<%= recipe.id %>/instructions" method="get">
+              <button type="submit" class="btn btn-link">Instructions</button>
+              </form>
+            </div>
+            <div class="col-xs-0">
+              <form class="form-horizontal" role="form" action="/recipes/<%= recipe.id %>/ingredients" method="get">
+              <button type="submit" class="btn btn-link">Ingredients</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

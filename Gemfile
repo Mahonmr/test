@@ -1,7 +1,11 @@
-source('https://rubygems.org')
+source 'https://rubygems.org'
 
-gem('rspec')
 gem('sinatra')
 gem('sinatra-contrib')
+gem('sinatra-activerecord')
+gem('rspec')
 gem('capybara')
 gem('pry')
+gem('launchy')
+gem('mysql2')
+gem('rake')
