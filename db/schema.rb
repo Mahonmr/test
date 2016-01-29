@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128065906) do
+ActiveRecord::Schema.define(version: 20160128212649) do
 
   create_table "ingredients", force: :cascade do |t|
     t.integer "amount",     limit: 4
@@ -28,6 +28,18 @@ ActiveRecord::Schema.define(version: 20160128065906) do
   create_table "recipes", force: :cascade do |t|
     t.integer "ranking", limit: 4
     t.string  "name",    limit: 255
+  end
+
+  create_table "recipes_tags", id: false, force: :cascade do |t|
+    t.integer "recipe_id", limit: 4
+    t.integer "tag_id",    limit: 4
+  end
+
+  add_index "recipes_tags", ["recipe_id"], name: "index_recipes_tags_on_recipe_id", using: :btree
+  add_index "recipes_tags", ["tag_id"], name: "index_recipes_tags_on_tag_id", using: :btree
+
+  create_table "tags", force: :cascade do |t|
+    t.string "tag", limit: 255
   end
 
 end

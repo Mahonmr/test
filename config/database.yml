@@ -5,7 +5,7 @@ development:
   database: recipes_development
   pool: 5
   username: root
-  password: nike12
+  password: root
   socket: /tmp/mysql.sock
 
 test:
@@ -15,5 +15,5 @@ test:
   database: recipes_test
   pool: 5
   username: root
-  password: nike12
+  password: root
   socket: /tmp/mysql.sock

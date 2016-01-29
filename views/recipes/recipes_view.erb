@@ -1,1 +1,48 @@
-<h1>view recipes</h1>
+<div class="container container-table">
+    <div class="row vertical-center-row">
+        <div class="text-center col-md-4 col-md-offset-4">
+          <h2><%= "#{@recipe.name}" %></h2>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+  <div class="row row-centered" style="margin-top:20px">
+    <div class="col-lg-2 col-centered withgap" style="background: #D3D3D3;">
+      <h3>Instructions</h3>
+      <ul id="padding">
+        <% @recipe.instructions.each do |instruction| %>
+          <li>
+            <%= instruction.step %>
+            <%= instruction.task %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-lg-2 col-centered withgap" style="background: #D3D3D3;">
+      <h3>Ingredients</h3>
+      <ul id="padding">
+        <% @recipe.ingredients.each do |ingredient| %>
+          <li>
+            <%= ingredient.amount %>
+            <%= ingredient.ingredient %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-lg-2 col-centered" style="background: #D3D3D3;">
+      <h3>Tags</h3>
+      <ul id="padding">
+        <% @recipe.tags.each do |tag| %>
+          <li>
+            <%= tag.tag %>
+            <form class="form-horizontal" role="form" action="<%= "/recipes/#{@recipe.id}/tags/#{tag.id}" %>" method="post">
+              <input name="_method" type="hidden" value="delete">
+              <input name="id" type="hidden" value="delete">
+              <button type="submit" class="btn btn-link">Delete</button>
+            </form>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

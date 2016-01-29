@@ -3,21 +3,39 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/custom.css">
       <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/">Home</a>
-          <a class="navbar-brand" href="/recipes">View Recipes</a>
-          <% if are_you?(request.path_info, 'recipes') %>
-            <a class="navbar-brand" href="/recipes/new">Add a Recipe</a>
-          <% elsif are_you?(request.path_info, 'instructions') %>
-            <a class="navbar-brand" href="<%= request.path_info %>/new">Add an Instruction</a>
-          <% elsif are_you?(request.path_info, 'ingredients') %>
-            <a class="navbar-brand" href="<%= request.path_info %>/new">Add an Ingredient</a>
-          <% end %>
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <ul class="nav navbar-nav">
+              <li><a class="navbar-brand" href="/">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+              <li><a class="navbar-brand" href="/recipes">View Recipes</a></li>
+              <% if are_you?(request.path_info, 'recipes') %>
+                <li><a class="navbar-brand" href="/recipes/new">Add a Recipe</a></li>
+              <% elsif are_you?(request.path_info, 'instructions') %>
+                <li><a class="navbar-brand" href="<%= request.path_info %>/new">Add an Instruction</a></li>
+              <% elsif are_you?(request.path_info, 'ingredients') %>
+                <li><a class="navbar-brand" href="<%= request.path_info %>/new">Add an Ingredient</a></li>
+              <% end %>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <% if are_you?(request.path_info, 'tags') %>
+                <li><a class="navbar-brand" href="/tags/new">Add a Tag</a></li>
+              <% else %>
+                <li><a class="navbar-brand" href="/tags">View Tags</a></li>
+              <% end %>
+              <form class="navbar-form" role="search" action="/search_results">
+                <div class="form-group">
+                  <input type="text" name="search" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+            </ul>
+          </div>
         </div>
-      </div>
     </nav>
   </head>
   <body>

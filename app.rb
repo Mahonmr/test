@@ -5,18 +5,19 @@ require('./lib/helper')
 require('./lib/recipes')
 require('./lib/instructions')
 require('./lib/ingredients')
+require('./lib/tags')
 require('mysql2')
 require('pry')
 also_reload('./lib/**/*.rb')
 
 get('/') do
-
   erb(:index)
 end
 
-#====================recipes===================================================
+#====================recipes====================================================
 
 get('/recipes') do
+  @tags = Tag.all
   @recipes = Recipe.all
   erb(:"/recipes/recipes")
 end
@@ -52,7 +53,7 @@ delete('/recipes/:id') do
   redirect('/recipes')
 end
 
-#====================instructions=================================================
+#====================instructions===============================================
 
 get('/recipes/:id/instructions') do
   @recipe = Recipe.find(params[:id].to_i)
@@ -88,7 +89,7 @@ delete('/recipes/:recipe_id/instructions/:id') do
 end
 
 
-#====================ingredients===================================================
+#====================ingredients================================================
 
 
 get('/recipes/:id/ingredients') do
@@ -124,6 +125,58 @@ delete('/recipes/:recipe_id/ingredients/:id') do
   redirect("/recipes/#{@ingredient.recipe_id}/ingredients")
 end
 
+#=======================tags====================================================
 
+get('/tags') do
+  @tags = Tag.all
+  erb(:"/tags/tags")
+end
 
+get('/tags/new') do
+  erb(:"/tags/tags_form")
+end
 
+post('/tags') do
+  Tag.create(params)
+  redirect("/tags")
+end
+
+get('/tags/:id/edit') do
+  @tag = Tag.find(params[:id].to_i)
+  erb(:"/tags/tags_edit")
+end
+
+patch('/tags/:id') do
+  @tag = Tag.find(params[:id].to_i)
+  @tag.update(tag: params[:tag])
+  redirect('/tags')
+end
+
+delete('/tags/:id') do
+  @tag = Tag.find(params[:id].to_i)
+  @tag.delete
+  redirect('/tags')
+end
+
+#======================tags recipes=============================================
+
+post('/recipes/:recipe_id/tags') do
+  recipe = Recipe.find(params[:recipe_id].to_i)
+  tag = Tag.find(params[:tag_id].to_i)
+  recipe.tags << tag
+  redirect('/recipes')
+end
+
+delete('/recipes/:recipe_id/tags/:tag_id') do
+  recipe = Recipe.find(params[:recipe_id].to_i)
+  tag = Tag.find(params[:tag_id].to_i)
+  recipe.tags.delete(tag)
+  redirect ("/recipes/#{params[:recipe_id].to_i}")
+end
+
+#==================search results===============================================
+
+get('/search_results') do
+  @results = Recipe.results(params[:search])
+  erb(:"/search_results")
+end

@@ -1,0 +1,10 @@
+<div class= 'container'>
+  <form action="/tags/<%= @tag.id %>" method="post">
+    <input name="_method" type="hidden" value="patch">
+    <div class="form-group">
+      <label>Edit the tag:</label>
+      <input type="text" class="form-control" id="tag" name="tag" value="<%= @tag.tag %>"><br>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>
