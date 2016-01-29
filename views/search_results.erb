@@ -1,5 +1,23 @@
-<h1>resutls</h1>
+<div class="container container-table">
+  <div class="row vertical-center-row">
+    <div class="text-center col-md-4 col-md-offset-4"><h2><%= "Search Results for \"#{@search}\"" %></h2></div>
+  </div>
+</div>
 
-<% @results.each do |result| %>
-  <%= result.name %>
-<% end %>
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Recipes</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @results.each do |result| %>
+        <tr>
+          <td><%= result.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

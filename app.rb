@@ -178,5 +178,6 @@ end
 
 get('/search_results') do
   @results = Recipe.results(params[:search])
+  @search = params[:search]
   erb(:"/search_results")
 end
